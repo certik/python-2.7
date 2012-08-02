@@ -1,0 +1,16 @@
+#! /bin/sh
+
+# Install this with:
+# SPKG_LOCAL=`pwd`/xx MAKEFLAGS="-j4" sh spkg-install
+
+if [ "$SPKG_LOCAL" = "" ]; then
+   echo "SPKG_LOCAL undefined ... exiting";
+   echo "Maybe run 'qsnake --shell'?"
+   exit 1
+fi
+
+set -e
+
+LDFLAGS="-L/lib/x86_64-linux-gnu/ -L/usr/lib/x86_64-linux-gnu/" ./configure --prefix="$SPKG_LOCAL"
+make
+make install
